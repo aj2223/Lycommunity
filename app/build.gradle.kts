@@ -64,6 +64,10 @@ dependencies {
     // lottie
     implementation ("com.airbnb.android:lottie:3.4.0")
 
+    //fireStore
+    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+    implementation("com.google.firebase:firebase-firestore")
+
     // main
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.7.0")

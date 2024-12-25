@@ -2,4 +2,13 @@
     <string name="app_name">Lycommunity</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email_title">Email</string>
+    <string name="example_mail_com_ph">example@mail.com.ph</string>
+    <string name="password_title">Password</string>
+    <string name="enter_password">enter password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_in_as_guest">Sign In As Guest</string>
+    <string name="sign_in">Sign In</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign Up</string>
 </resources>

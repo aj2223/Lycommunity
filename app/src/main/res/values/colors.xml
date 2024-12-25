@@ -1,5 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="core_base_color">#E5E5EA</color>
+    <color name="core_text_color">#24272B</color>
+    <color name="core_hint_color">#FF3E4A59</color>
+    <color name="status_bar">#F5F5F5</color>
+    <color name="selecta_red">#FFD30906</color>
+
+
+    <color name="colorFb">#3B5998</color>
+    <color name="colorPrimary">#FF8828</color>
+    <color name="ColorBackground">#FFFFFF</color>
+
+
+
+    <color name="ColorStatusPending">#FFA1AEB7</color>
+    <color name="ColorStatusDispatched">#FFFBB400</color>
+    <color name="ColorStatusDelivered">#FF85CB00</color>
+    <color name="ColorStatusCancelled">#F33A3A</color>
+    <color name="ColorStatusForPickup">#FFC107</color>
+    <color name="ColorStatusInProcess">#17A2B8</color>
+    <color name="ColorBackgroundList">#FFF2F2F4</color>
+    <color name="ColorGradientRed">#FFFF1F0A</color>
+    <color name="ColorFilterPurple">#B073E0</color>
+    <color name="ColorActiveBlue">#5182FF</color>
+    <color name="ColorGreenCheck">#82FFBB</color>
+    <color name="ColorProgressGreen">#00AFAA</color>
+    <color name="ColorProgressGray">#EDEEF0</color>
+    <color name="ColorProgressIconGray">#87929D</color>
+    <color name="ColorProgressIconGray2">#E5E5E5</color>
+
+    <color name="ColorAlertRed">#FF2D2D</color>
+
+    <color name="ColorWarning">#E6FF3F3F</color>
+    <color name="ColorHint">#FFA1AEB7</color>
+
+    <color name="ColorSwitchGreen">#FF43E97B</color>
+    <color name="ColorSwitchGray">#FFB2B2B2</color>
+    <color name="ColorSnackbar">#E6212121</color>
+    <color name="ColorBadge">#FFFF3F3F</color>
+    <color name="ColorTintGold">#FFDD65</color>
+    <color name="ColorValid">#2BD081</color>
+    <color name="ColorInValid">#FF4E4E</color>
+    <color name="ColorTimer">#2CCD76</color>
+    <color name="ColorFileBGGray">#F8F9FB</color>
+    <color name="ColorCancel">#FF5353</color>
+
+    <color name="colorAccent">#FF4081</color>
+    <color name="cursor_color">#bdc2c7</color>
+    <color name="transaction_failed">#FF2D2D</color>
+    <color name="off_white">#F2F4F6</color>
+    <color name="wallet_default_text_color">#2F3941</color>
+    <color name="transaction_success">#23D56A</color>
+    <color name="wallet_details">#49545C</color>
+
+    <color name="color_blue_opaque">#1A5182FF</color>
+    <color name="color_green_opaque">#1A2BD081</color>
+    <color name="color_red_opaque">#1AFF4E4E</color>
+    <color name="color_light_red">#FFF1F1</color>
+
+    <color name="color_status_blue">#5182FF</color>
+    <color name="color_status_green">#2BD081</color>
+    <color name="color_status_red">#FF4E4E</color>
+    <color name="ColorDefaultBorderGray">#808080</color>
+
+
 </resources>
+

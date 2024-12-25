@@ -1,17 +1,15 @@
 package com.project.lycommunity.ui.splash
 
-import android.os.Handler
-import android.os.Looper
-import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SplashViewModel : ViewModel() {
 
@@ -34,18 +32,20 @@ class SplashViewModel : ViewModel() {
 
     fun showSplash2(){
         viewModelScope.launch {
-            _uiState.update {
+            withContext(Dispatchers.IO) {
+//            _uiState.update {
+//                    it.copy(
+//                        isLoading = true,
+//                        finishedPlaying = false
+//                    )
+//            }
+                delay(4000)
+                _uiState.update {
                     it.copy(
-                        isLoading = true,
-                        finishedPlaying = false
+                        isLoading = false,
+                        finishedPlaying = true
                     )
-            }
-            delay(4000)
-            _uiState.update {
-                it.copy(
-                    isLoading = false,
-                    finishedPlaying = true
-                )
+                }
             }
         }
 //        Handler(Looper.getMainLooper()).postDelayed({
