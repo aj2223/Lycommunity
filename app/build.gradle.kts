@@ -1,3 +1,5 @@
+import org.gradle.internal.impldep.org.tomlj.internal.TomlParser.TrueBoolContext
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -33,9 +35,22 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
+
+    val navVersion = "2.8.5"
+    // Views/Fragments integration
+    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$navVersion") // For ViewModel support in navigation
+
+
+    implementation ("com.airbnb.android:lottie:3.4.0")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.7.0")
