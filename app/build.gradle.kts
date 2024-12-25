@@ -43,15 +43,28 @@ android {
 
 dependencies {
 
+    val lifecycle_version = "2.8.7"
     val navVersion = "2.8.5"
+
     // Views/Fragments integration
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$navVersion") // For ViewModel support in navigation
 
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
 
+
+    // coroutine
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+
+    // lottie
     implementation ("com.airbnb.android:lottie:3.4.0")
 
+    // main
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
