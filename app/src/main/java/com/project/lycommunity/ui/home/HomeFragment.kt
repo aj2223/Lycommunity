@@ -1,4 +1,4 @@
-package com.project.lycommunity.ui.parent
+package com.project.lycommunity.ui.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,20 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.project.lycommunity.R
-import com.project.lycommunity.databinding.FragmentParentBinding
+import com.project.lycommunity.databinding.FragmentHomeBinding
 
+class HomeFragment : Fragment() {
 
-class ParentFragment : Fragment() {
-
-    private var _binding : FragmentParentBinding? = null
+    private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentParentBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

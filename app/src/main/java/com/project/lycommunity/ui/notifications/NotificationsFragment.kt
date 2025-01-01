@@ -1,4 +1,4 @@
-package com.project.lycommunity.ui.parent
+package com.project.lycommunity.ui.notifications
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,19 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.project.lycommunity.R
-import com.project.lycommunity.databinding.FragmentParentBinding
+import com.project.lycommunity.databinding.FragmentNotificationsBinding
 
+class NotificationsFragment : Fragment() {
 
-class ParentFragment : Fragment() {
-
-    private var _binding : FragmentParentBinding? = null
+    private var _binding : FragmentNotificationsBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentParentBinding.inflate(inflater, container, false)
+        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroyView() {
