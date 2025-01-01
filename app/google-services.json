@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "592296592955",
+    "project_id": "projectone-cb744",
+    "storage_bucket": "projectone-cb744.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592296592955:android:9aa8d896889494c39cbe1e",
+        "android_client_info": {
+          "package_name": "com.project.lycommunity"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUGm-yzyNFxKQYjEuEzTUygtSzgVZlaQM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

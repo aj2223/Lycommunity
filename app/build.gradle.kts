@@ -3,6 +3,7 @@ import org.gradle.internal.impldep.org.tomlj.internal.TomlParser.TrueBoolContext
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -60,6 +61,7 @@ dependencies {
     // coroutine
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
 
     // lottie
     implementation ("com.airbnb.android:lottie:3.4.0")
@@ -67,6 +69,12 @@ dependencies {
     //fireStore
     implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
     implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-analytics")
+
+//    implementation ("com.google.firebase:firebase-firestore-ktx:25.1.1")
+
+    // BCrypt for password hashing
+    implementation ("at.favre.lib:bcrypt:0.9.0")
 
     // main
     implementation("androidx.core:core-ktx:1.9.0")

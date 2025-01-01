@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -48,13 +48,49 @@
             app:layout_constraintTop_toBottomOf="@id/guide_top" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout_register_name"
+            android:id="@+id/input_layout_idNumber"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             app:layout_constraintEnd_toStartOf="@id/guide_right"
             app:layout_constraintStart_toEndOf="@id/guide_left"
             app:layout_constraintTop_toBottomOf="@id/image_logo">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/name_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:gravity="center"
+                    android:text="Student ID Number"
+                    android:textColor="@color/core_text_color"
+                    android:textSize="20sp" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Input Student ID number"
+                    android:textColor="@color/core_text_color" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_layout_register_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toStartOf="@id/guide_right"
+            app:layout_constraintStart_toEndOf="@id/guide_left"
+            app:layout_constraintTop_toBottomOf="@id/input_layout_idNumber">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -229,8 +265,10 @@
                     android:id="@+id/register_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="textPassword"
                     android:hint="@string/register_password"
-                    android:textColor="@color/core_text_color" />
+                    android:textColor="@color/core_text_color"
+                    />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
         </com.google.android.material.textfield.TextInputLayout>
@@ -286,4 +324,4 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+</ScrollView>
