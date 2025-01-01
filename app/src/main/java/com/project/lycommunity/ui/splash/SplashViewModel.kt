@@ -25,20 +25,11 @@ class SplashViewModel : ViewModel() {
 
             _uiState.value = _uiState.value.copy(isLoading = false, finishedPlaying = true)
         }
-//        Handler(Looper.getMainLooper()).postDelayed({
-//
-//        }, 4000) // Adjust time as needed
     }
 
     fun showSplash2(){
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-//            _uiState.update {
-//                    it.copy(
-//                        isLoading = true,
-//                        finishedPlaying = false
-//                    )
-//            }
                 delay(4000)
                 _uiState.update {
                     it.copy(
@@ -48,12 +39,5 @@ class SplashViewModel : ViewModel() {
                 }
             }
         }
-//        Handler(Looper.getMainLooper()).postDelayed({
-//
-//        }, 4000) // Adjust time as needed
     }
-
-
-
-
 }

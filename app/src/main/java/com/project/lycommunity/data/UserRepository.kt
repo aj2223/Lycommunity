@@ -8,10 +8,11 @@ import kotlinx.coroutines.tasks.await
 
 class UserRepository {
     private val firestore = FirebaseFirestore.getInstance()
-    private val usersCollection = firestore.collection("users")
-    private val studentsCollection = firestore.collection("students")
+    private val usersCollection = firestore.collection("Users")
+    private val studentsCollection = firestore.collection("Students")
     suspend fun registerUser(user: User): ResultsWrapper<Void?> {
         return try {
+            val email = user.email ?: return ResultsWrapper.Error(Exception("Email cannot be null."))
             val userData = mapOf(
                 "firstName" to user.firstName,
                 "lastName" to user.lastName,
@@ -19,66 +20,35 @@ class UserRepository {
                 "department" to user.department,
                 "passwordHash" to user.passwordHash
             )
-            usersCollection.document(user.email).set(userData).await()
+            usersCollection.document(email).set(userData).await()
             ResultsWrapper.Success(null) // Registration successful
         } catch (e: Exception) {
             ResultsWrapper.Error(e)
         }
     }
 
-    suspend fun validateUser(email: String, enteredId: String): ResultsWrapper<String> {
+    suspend fun validateUser(email: String, enteredId: String): ResultsWrapper<Boolean> {
         return try {
-            // Query for the document with the provided ID
             val querySnapshot = studentsCollection.whereEqualTo("IDNumber", enteredId).get().await()
 
             if (!querySnapshot.isEmpty) {
-                // ID exists; now validate the email
                 val document = querySnapshot.documents.first()
                 val validEmail = document.getString("email")
 
                 if (validEmail == email) {
-                    ResultsWrapper.Success("Valid") // Both email and ID match
+                    ResultsWrapper.Success(true) // Email and ID match
                 } else {
                     ResultsWrapper.Error(Exception("Invalid email for the provided ID.")) // Email mismatch
                 }
             } else {
-                ResultsWrapper.Error(Exception("ID does not belong to an Enrolled Student")) // ID does not exist
+                ResultsWrapper.Error(Exception("ID does not belong to an enrolled Student.")) // ID does not exist
             }
         } catch (e: Exception) {
-            ResultsWrapper.Error(e) // Handle Firestore or network errors
+            ResultsWrapper.Error(e)
         }
     }
 
-//    suspend fun validateUser(email: String, enteredId: String): ResultsWrapper<Boolean> {
-//        return try {
-//            // Query Firestore for a document where the email field matches
-//            val querySnapshot = studentsCollection
-//                .whereEqualTo("email", email)
-//                .get()
-//                .await()
-//
-//            if (!querySnapshot.isEmpty) {
-//                // Document exists; retrieve the IDNumber field
-//                val document = querySnapshot.documents.first()
-//                val validId = document.getString("IDNumber")
-//                Log.d("ValidateUser", "Document found. Retrieved IDNumber: $validId for email: $email")
-//
-//                return if (validId == enteredId) {
-//                    Log.d("ValidateUser", "ID matches for email: $email")
-//                    ResultsWrapper.Success(true) // Validation successful
-//                } else {
-//                    Log.e("ValidateUser", "Entered ID ($enteredId) does not match valid ID ($validId) for email: $email")
-//                    ResultsWrapper.Success(false) // ID mismatch
-//                }
-//            } else {
-//                Log.e("ValidateUser", "No document found for email: $email")
-//                ResultsWrapper.Success(false) // Email not found
-//            }
-//        } catch (e: Exception) {
-//            Log.e("ValidateUser", "Error validating user: ${e.message}")
-//            ResultsWrapper.Error(e) // Handle errors
-//        }
-//    }
+
     suspend fun loginUser(email: String, password: String): ResultsWrapper<User> {
         return try {
             val querySnapshot = usersCollection
@@ -94,7 +64,7 @@ class UserRepository {
             val user = document.toObject(User::class.java)
 
             if (user != null) {
-                val isPasswordValid = SecurityUtils.verifyPassword(password, user.passwordHash)
+                val isPasswordValid = SecurityUtils.verifyPassword(password, user.passwordHash ?: "")
                 if (isPasswordValid) {
                     ResultsWrapper.Success(user)
                 } else {
@@ -118,6 +88,23 @@ class UserRepository {
             }
         } catch (e: Exception) {
             ResultsWrapper.Error(e) // Handle errors
+        }
+    }
+
+    suspend fun checkIfPasswordExists(password: String): ResultsWrapper<Boolean> {
+        return try {
+            val querySnapshot = usersCollection.get().await()
+
+            for (document in querySnapshot.documents) {
+                val hashedPassword = document.getString("passwordHash")
+                if (hashedPassword != null && SecurityUtils.verifyPassword(password, hashedPassword)) {
+                    return ResultsWrapper.Success(true) // Password exists
+                }
+            }
+
+            ResultsWrapper.Success(false) // Password does not exist
+        } catch (e: Exception) {
+            ResultsWrapper.Error(e)
         }
     }
 

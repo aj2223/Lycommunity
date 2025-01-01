@@ -31,7 +31,6 @@ class SignUpViewModel(
         enteredId: String
     ) {
         _uiState.update { it.copy(isLoading = true) }
-        Log.d("SignUpViewModel", "Registration started for email: $email")
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -41,16 +40,28 @@ class SignUpViewModel(
                         it.copy(
                             isLoading = false,
                             isSuccess = false,
-                            errorMessage = "Registration Fail. Email is already used."
+                            errorMessage = "Email is already registered."
                         )
                     }
                     return@launch
                 }
 
+
+                val passwordExists = repository.checkIfPasswordExists(password)
+                if (passwordExists is ResultsWrapper.Success && passwordExists.data) {
+                    _uiState.update {
+                        it.copy(
+                            isLoading = false,
+                            isSuccess = false,
+                            errorMessage = "This password has already been used. Please choose a different password."
+                        )
+                    }
+                    return@launch
+                }
                 val validationResult = repository.validateUser(email, enteredId)
-                if (validationResult is ResultsWrapper.Success) {
-                    // Proceed with registration in the users collection
+                if (validationResult is ResultsWrapper.Success && validationResult.data) {
                     val hashedPassword = SecurityUtils.hashPassword(password)
+                    // Proceed with registration
                     val user = User(
                         firstName = firstName,
                         lastName = lastName,
@@ -78,7 +89,6 @@ class SignUpViewModel(
                         }
                     }
                 } else if (validationResult is ResultsWrapper.Error) {
-                    // Display the error from validateUser (email or ID issue)
                     _uiState.update {
                         it.copy(
                             isLoading = false,
@@ -99,7 +109,6 @@ class SignUpViewModel(
         }
     }
 
-    // Reset state to prevent duplicate toasts or UI updates
     fun resetState() {
         _uiState.update {
             it.copy(

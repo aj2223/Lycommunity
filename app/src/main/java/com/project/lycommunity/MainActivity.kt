@@ -24,40 +24,6 @@ class MainActivity : AppCompatActivity() {
         FirebaseApp.initializeApp(this)
         Log.d("FirebaseInit", "Firebase initialized successfully")
 
-//        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-//            override fun handleOnBackPressed() {
-//                val currentFragment =
-//                    supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.childFragmentManager?.fragments?.firstOrNull()
-//
-//                // If current fragment is LoginFragment, show exit confirmation
-//                if (currentFragment is LoginFragment) {
-//                    showExitConfirmationDialog()
-//                } else {
-//                    // Safely check if navigation can go back
-//                    val navController = currentFragment?.findNavController()
-//                    if (navController?.navigateUp() == false) {
-//                        finish() // Exit app if no more destinations in the stack
-//                    }
-//                }
-//            }
-//        })
-//        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-//            override fun handleOnBackPressed() {
-//                val currentFragment =
-//                    supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
-//
-//                // If current fragment is LoginFragment, show exit confirmation
-//                if (currentFragment is LoginFragment) {
-//                    showExitConfirmationDialog()
-//                } else {
-//                    val navController = currentFragment?.findNavController()
-//                    if (navController?.navigateUp() == false) {
-//                        finish() // Exit app if no more destinations in the stack
-//                    }
-//                }
-//            }
-//        }
-//        )
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 val currentFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
@@ -68,13 +34,9 @@ class MainActivity : AppCompatActivity() {
                         .replace(R.id.nav_host_fragment, LoginFragment())
                         .addToBackStack(null)
                         .commit()
-
                 }
-
             }
         })
-
-
     }
 
 
