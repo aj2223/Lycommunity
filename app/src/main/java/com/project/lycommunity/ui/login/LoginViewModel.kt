@@ -56,7 +56,7 @@ class LoginViewModel(
     fun login(email: String, password: String) {
         _uiState.update { it.copy(isLoading = true) }
 
-        viewModelScope.launch {
+        viewModelScope.launch() {
             val result = userRepository.loginUser(email, password)
             when (result) {
                 is ResultsWrapper.Success -> {

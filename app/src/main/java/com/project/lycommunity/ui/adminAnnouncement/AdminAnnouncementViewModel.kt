@@ -3,6 +3,7 @@ package com.project.lycommunity.ui.adminAnnouncement
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.project.lycommunity.data.AnnouncementRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -21,7 +22,7 @@ class AdminAnnouncementViewModel(
     fun addAnnouncement(title: String, description: String) {
         _uiState.update { it.copy(isLoading = true) }
 
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 repository.addAnnouncement(title, description, System.currentTimeMillis())
                 _uiState.update { it.copy(isLoading = false, successMessage = "Announcement added successfully.") }
