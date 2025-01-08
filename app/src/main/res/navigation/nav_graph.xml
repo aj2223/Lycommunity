@@ -23,9 +23,6 @@
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_parentFragment"
-            app:destination="@id/parentFragment" />
     </fragment>
 
     <fragment
@@ -39,12 +36,22 @@
     </fragment>
 
     <fragment
-        android:id="@+id/parentFragment"
-        android:name="com.project.lycommunity.ui.parent.ParentFragment"
-        android:label="fragment_parent"
-        tools:layout="@layout/fragment_parent">
+        android:id="@+id/adminLoginFragment"
+        android:name="com.project.lycommunity.ui.adminLogin.AdminLoginFragment"
+        android:label="Admin Login"
+        tools:layout="@layout/fragment_admin_login">
         <action
-            android:id="@+id/action_parentFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            android:id="@+id/action_adminLoginFragment_to_adminAnnouncementFragment"
+            app:destination="@id/adminAnnouncementFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/adminAnnouncementFragment"
+        android:name="com.project.lycommunity.ui.adminAnnouncement.AdminAnnouncementFragment"
+        android:label="Admin Announcement"
+        tools:layout="@layout/fragment_admin_announcement" />
+
+
+
+
 </navigation>

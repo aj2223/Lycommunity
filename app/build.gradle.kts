@@ -4,6 +4,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
+    id ("kotlin-parcelize")
+    
 }
 
 android {
@@ -70,6 +72,13 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-analytics")
+    implementation ("com.google.firebase:firebase-auth-ktx:23.1.0") // Use the latest version
+    implementation ("com.google.firebase:firebase-storage:21.0.1") // Use the latest version
+    implementation ("com.google.firebase:firebase-appcheck-playintegrity:18.0.0")
+    implementation ("com.google.firebase:firebase-appcheck-debug:18.0.0")
+
+
+
 
 //    implementation ("com.google.firebase:firebase-firestore-ktx:25.1.1")
 

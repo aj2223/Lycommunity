@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import at.favre.lib.crypto.bcrypt.BCrypt
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.project.lycommunity.data.UserRepository
 import com.project.lycommunity.util.LoginValidationHelper
@@ -24,32 +25,60 @@ class LoginViewModel(
     private val _uiState: MutableStateFlow<LoginUIState> = MutableStateFlow(LoginUIState())
     var loginStateFlow: StateFlow<LoginUIState> = _uiState.asStateFlow()
 
+//    private var userEmail: String? = null // Store the authenticated user's email
+
+    private val _userEmail = MutableStateFlow<String?>(null) // Store the authenticated user's email
+    val userEmail: StateFlow<String?> = _userEmail.asStateFlow()
+
+
+
+//    fun login(email: String, password: String) {
+//        _uiState.update { it.copy(isLoading = true) }
+//
+//        viewModelScope.launch {
+//            val result = userRepository.loginUser(email, password)
+//            when (result) {
+//                is ResultsWrapper.Success -> {
+//                    userEmail = email // Save email for later use
+//                    _uiState.update { it.copy(isLoading = false, isSuccess = true) }
+//                }
+//                is ResultsWrapper.Error -> {
+//                    _uiState.update {
+//                        it.copy(isLoading = false, errorMessage = result.exception.message)
+//                    }
+//                }
+//
+//                else -> {}
+//            }
+//        }
+//    }
+
     fun login(email: String, password: String) {
         _uiState.update { it.copy(isLoading = true) }
 
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                val loginResult = userRepository.loginUser(email, password)
-                if (loginResult is ResultsWrapper.Success) {
+            val result = userRepository.loginUser(email, password)
+            when (result) {
+                is ResultsWrapper.Success -> {
+                    _userEmail.value = email // Save the logged-in user's email
+                    _uiState.update { it.copy(isLoading = false, isSuccess = true) }
+                }
+                is ResultsWrapper.Error -> {
                     _uiState.update {
-                        it.copy(
-                            isLoading = false,
-                            isSuccess = true,
-                            errorMessage = null
-                        )
-                    }
-                } else if (loginResult is ResultsWrapper.Error) {
-                    _uiState.update {
-                        it.copy(
-                            isLoading = false,
-                            isSuccess = false,
-                            errorMessage = loginResult.exception.message
-                        )
+                        it.copy(isLoading = false, errorMessage = result.exception.message)
                     }
                 }
+
+                else -> {}
             }
         }
     }
+
+    fun getUserEmail(): String? {
+        return _userEmail.value
+    }
+
+
 
     fun resetState() {
         _uiState.update {

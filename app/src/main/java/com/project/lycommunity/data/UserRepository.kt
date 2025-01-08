@@ -108,5 +108,32 @@ class UserRepository {
         }
     }
 
+    suspend fun authenticateUser(email: String, password: String): ResultsWrapper<String> {
+        return try {
+            val querySnapshot = firestore.collection("Users")
+                .whereEqualTo("email", email)
+                .get()
+                .await()
+
+            if (!querySnapshot.isEmpty) {
+                val user = querySnapshot.documents.first()
+                val storedPasswordHash = user.getString("passwordHash") ?: ""
+
+                Log.d("UserRepository", "Email: $email, Stored Hash: $storedPasswordHash, Provided Password: $password")
+
+                // For plain text password (for debugging only, insecure)
+                if (storedPasswordHash == password) {
+                    ResultsWrapper.Success(user.id) // Return user ID on success
+                } else {
+                    ResultsWrapper.Error(Exception("Invalid credentials."))
+                }
+            } else {
+                ResultsWrapper.Error(Exception("User not found."))
+            }
+        } catch (e: Exception) {
+            ResultsWrapper.Error(e)
+        }
+    }
+
 
 }

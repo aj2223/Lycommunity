@@ -7,6 +7,17 @@
     <color name="selecta_red">#FFD30906</color>
 
     <color name="dark_gray">#333333</color>
+    <color name="dark_BG">#D9D9D9</color>
+    <color name="mainColor">#065087</color>
+
+    <color name="primaryColor">#6200EA</color>
+    <color name="likeColor">#4CAF50</color>
+    <color name="dislikeColor">#F44336</color>
+
+    <color name="like_active">#4CAF50</color>
+    <color name="like_inactive">#BDBDBD</color>
+    <color name="dislike_active">#F44336</color>
+    <color name="dislike_inactive">#BDBDBD</color>
 
 
 

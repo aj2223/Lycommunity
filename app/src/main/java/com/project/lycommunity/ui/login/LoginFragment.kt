@@ -1,27 +1,22 @@
 package com.project.lycommunity.ui.login
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.fragment.findNavController
+import com.google.firebase.firestore.FirebaseFirestore
 import com.project.lycommunity.R
-import com.project.lycommunity.data.UserRepository
 import com.project.lycommunity.databinding.FragmentLoginBinding
-import com.project.lycommunity.ui.parent.ParentFragment
+import com.project.lycommunity.ui.adminLogin.AdminLoginFragment
+import com.project.lycommunity.ui.home.HomeFragment
 import com.project.lycommunity.ui.signup.SignUpFragment
 import com.project.lycommunity.util.LoginValidationHelper
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
@@ -30,6 +25,9 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModelOfLogin : LoginViewModel by activityViewModels() {LoginViewModelFactory()}
+
+    private val firestore = FirebaseFirestore.getInstance()
+    private var currentUserEmail: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +44,7 @@ class LoginFragment : Fragment() {
         setupListeners()
         observeViewModel()
         goToSignUpFragment()
+        goToAdminFragment()
 
     }
 
@@ -75,13 +74,14 @@ class LoginFragment : Fragment() {
 
     private fun observeViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.lifecycle.repeatOnLifecycle(androidx.lifecycle.Lifecycle.State.STARTED) {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModelOfLogin.loginStateFlow.collect { state ->
+                    binding.progressBar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
                     binding.signInButton.isEnabled = !state.isLoading
 
                     if (state.isSuccess) {
                         Toast.makeText(context, "Login successful!", Toast.LENGTH_SHORT).show()
-                        goToParentFragment()
+                        navigateToHomeFragment()
                         viewModelOfLogin.resetState()
                     }
 
@@ -94,9 +94,12 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun goToParentFragment(){
+
+
+
+    private fun navigateToHomeFragment() {
         parentFragmentManager.beginTransaction()
-            .replace(R.id.nav_host_fragment, ParentFragment())
+            .replace(R.id.nav_host_fragment, HomeFragment())
             .addToBackStack(null)
             .commit()
     }
@@ -109,6 +112,17 @@ class LoginFragment : Fragment() {
                 .commit()
         }
     }
+
+    private fun goToAdminFragment(){
+        binding.txtSignInAsAdmin.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment, AdminLoginFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+    }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

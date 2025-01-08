@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="8dp"
+    android:padding="16dp"
+    android:background="@color/off_white">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/events_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Sample Title"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Description -->
+    <TextView
+        android:id="@+id/events_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Sample Description"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/events_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <!-- Timestamp -->
+    <TextView
+        android:id="@+id/events_timestamp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Just now"
+        android:textSize="12sp"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/events_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <!-- Like and Dislike Buttons -->
+    <LinearLayout
+        android:id="@+id/like_dislike_events_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/events_timestamp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp">
+
+        <!-- Like Icon -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/like_icon_events"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/thumbs_up"
+            android:contentDescription="Like"
+            android:tint="@color/likeColor" />
+
+        <!-- Like Count -->
+        <TextView
+            android:id="@+id/like_count_events"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="16dp"
+            android:textSize="14sp" />
+
+        <!-- Dislike Icon -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dislike_icon_events"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/thumb_down"
+            android:contentDescription="Dislike"
+            android:tint="@color/dislikeColor" />
+
+        <!-- Dislike Count -->
+        <TextView
+            android:id="@+id/dislike_count_events"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:layout_marginStart="4dp"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

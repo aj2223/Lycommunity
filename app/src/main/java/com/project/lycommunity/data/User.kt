@@ -5,5 +5,8 @@ data class User(
     val lastName: String? = null,
     val email: String? = null,
     val department: String? = null,
-    val passwordHash: String? = null
+    val passwordHash: String? = null,
+    val bio: String = "",
+    val likes: String = "",
+    val hobbies: String = ""
 )

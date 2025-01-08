@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "954960992421",
-    "project_id": "projectone-938a3",
-    "storage_bucket": "projectone-938a3.firebasestorage.app"
+    "project_number": "844580186508",
+    "project_id": "sample-aeedd",
+    "storage_bucket": "sample-aeedd.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:954960992421:android:720713837a43525fc0554c",
+        "mobilesdk_app_id": "1:844580186508:android:0e02167153799a29284ea9",
         "android_client_info": {
           "package_name": "com.project.lycommunity"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDo4pEeFPEawxFhAEcAVWcG-NM5fklhXCw"
+          "current_key": "AIzaSyBpLsgbocT-1xe1Bdj38XShIgHjYp8bwTM"
         }
       ],
       "services": {

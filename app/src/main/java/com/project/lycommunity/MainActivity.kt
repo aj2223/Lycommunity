@@ -4,14 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.OnBackPressedCallback
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.FirebaseApp
 import com.project.lycommunity.databinding.ActivityMainBinding
 import com.project.lycommunity.ui.login.LoginFragment
-import com.project.lycommunity.ui.parent.ParentFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,8 +17,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        FirebaseApp.initializeApp(this)
-        Log.d("FirebaseInit", "Firebase initialized successfully")
+        if (FirebaseApp.getApps(this).isEmpty()) {
+            Log.e("FirebaseInit", "Firebase is not initialized!")
+        } else {
+            Log.d("FirebaseInit", "Firebase is initialized.")
+        }
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
