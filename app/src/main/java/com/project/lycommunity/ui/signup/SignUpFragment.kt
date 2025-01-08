@@ -12,8 +12,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.project.lycommunity.R
 import com.project.lycommunity.data.UserRepository
 import com.project.lycommunity.databinding.FragmentSignUpBinding
+import com.project.lycommunity.ui.login.LoginFragment
 import kotlinx.coroutines.launch
 
 class SignUpFragment : Fragment() {
@@ -38,6 +40,7 @@ class SignUpFragment : Fragment() {
 
         setupListeners()
         observeViewModel()
+        gotoSignIn()
 
 
     }
@@ -94,6 +97,15 @@ class SignUpFragment : Fragment() {
         binding.registerLastName.text?.clear()
         binding.registerDepartment.text?.clear()
         binding.inputId.text?.clear()
+    }
+
+    private fun gotoSignIn(){
+        binding.goToSignIn.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment, LoginFragment())
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
 

@@ -4,35 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.adminLogin.AdminSignUpFragment">
+    tools:context=".ui.adminLogin.signUp.AdminSignUpFragment"
+    android:padding="20dp">
 
-    <!-- Title -->
-    <TextView
-        android:id="@+id/signup_title"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Admin Sign-Up"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/logo3"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="24dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Admin Email Input -->
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/admin_email_input"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:hint="Admin Email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintTop_toBottomOf="@id/signup_title"
+        app:layout_constraintTop_toBottomOf="@id/image_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="40dp" />
 
     <!-- Admin Password Input -->
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/admin_password_input"
         android:layout_width="0dp"
         android:layout_height="48dp"
@@ -41,10 +40,12 @@
         app:layout_constraintTop_toBottomOf="@id/admin_email_input"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp" />
 
     <!-- Confirm Password Input -->
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/admin_confirm_password_input"
         android:layout_width="0dp"
         android:layout_height="48dp"
@@ -53,17 +54,22 @@
         app:layout_constraintTop_toBottomOf="@id/admin_password_input"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp" />
 
     <!-- Register Admin Button -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/register_admin_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Register Admin"
         app:layout_constraintTop_toBottomOf="@id/admin_confirm_password_input"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="24dp" />
 
     <!-- Progress Bar -->
     <ProgressBar

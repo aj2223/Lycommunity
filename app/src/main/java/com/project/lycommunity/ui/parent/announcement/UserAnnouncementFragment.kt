@@ -40,12 +40,6 @@ class UserAnnouncementFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        if (currentUser == null) {
-            Log.e("UserAnnouncementFragment", "User is not authenticated.")
-        } else {
-            Log.d("UserAnnouncementFragment", "User ID: ${currentUser.uid}")
-        }
 
         setupRecyclerView()
         observeAnnouncements()

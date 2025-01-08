@@ -11,6 +11,9 @@ class EventsRepository {
 
     private val firestore = FirebaseFirestore.getInstance()
     private val eventsCollection = firestore.collection("events")
+
+    //added
+    private val notificationsCollection = firestore.collection("notifications")
     fun getEventsFlow(): Flow<List<Events>> = callbackFlow {
         val listener = eventsCollection
             .orderBy("timestamp", Query.Direction.DESCENDING)
@@ -29,20 +32,45 @@ class EventsRepository {
         awaitClose { listener.remove() }
     }
 
+    /**
+     * Add an event and create a notification.
+     */
     suspend fun addEvents(title: String, description: String, timestamp: Long) {
-        val eventsData = mapOf(
+        val eventData = mapOf(
             "title" to title,
             "description" to description,
-            "timestamp" to timestamp,
-            "likes" to 0,
-            "dislikes" to 0
+            "timestamp" to timestamp
         )
         try {
-            eventsCollection.add(eventsData).await()
+            // Add event to Firestore
+            eventsCollection.add(eventData).await()
+
+            // Add notification for the event
+            val notificationData = mapOf(
+                "type" to "event",
+                "title" to "New Event",
+                "description" to "Admin posted: $title",
+                "timestamp" to timestamp
+            )
+            notificationsCollection.add(notificationData).await()
         } catch (e: Exception) {
-            throw Exception("Failed to add event: ${e.message}")
+            throw Exception("Failed to add event and notification: ${e.message}")
         }
     }
+//    suspend fun addEvents(title: String, description: String, timestamp: Long) {
+//        val eventsData = mapOf(
+//            "title" to title,
+//            "description" to description,
+//            "timestamp" to timestamp,
+//            "likes" to 0,
+//            "dislikes" to 0
+//        )
+//        try {
+//            eventsCollection.add(eventsData).await()
+//        } catch (e: Exception) {
+//            throw Exception("Failed to add event: ${e.message}")
+//        }
+//    }
 
     suspend fun updateEvents(eventsId: String, title: String, description: String) {
         try {

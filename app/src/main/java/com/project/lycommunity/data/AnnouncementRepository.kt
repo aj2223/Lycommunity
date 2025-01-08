@@ -16,6 +16,8 @@ class AnnouncementRepository {
 
     private val firestore = FirebaseFirestore.getInstance()
     private val announcementsCollection = firestore.collection("announcements")
+    //added
+    private val notificationsCollection = firestore.collection("notifications")
 
 
     fun getAnnouncementsFlow(): Flow<List<Announcement>> = callbackFlow {
@@ -40,12 +42,35 @@ class AnnouncementRepository {
         val announcementData = mapOf(
             "title" to title,
             "description" to description,
-            "timestamp" to timestamp,
-            "likes" to 0,
-            "dislikes" to 0
+            "timestamp" to timestamp
         )
-        announcementsCollection.add(announcementData).await()
+        try {
+            // Add announcement to Firestore
+            announcementsCollection.add(announcementData).await()
+
+            // Add notification for the announcement
+            val notificationData = mapOf(
+                "type" to "announcement",
+                "title" to "New Announcement",
+                "description" to "Admin posted: $title",
+                "timestamp" to timestamp
+            )
+            notificationsCollection.add(notificationData).await()
+        } catch (e: Exception) {
+            throw Exception("Failed to add announcement and notification: ${e.message}")
+        }
     }
+
+//    suspend fun addAnnouncement(title: String, description: String, timestamp: Long) {
+//        val announcementData = mapOf(
+//            "title" to title,
+//            "description" to description,
+//            "timestamp" to timestamp,
+//            "likes" to 0,
+//            "dislikes" to 0
+//        )
+//        announcementsCollection.add(announcementData).await()
+//    }
 
     suspend fun updateAnnouncement(announcementId: String, title: String, description: String) {
         announcementsCollection.document(announcementId).update(

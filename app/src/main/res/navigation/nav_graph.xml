@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/adminLoginFragment"
-        android:name="com.project.lycommunity.ui.adminLogin.AdminLoginFragment"
+        android:name="com.project.lycommunity.ui.adminLogin.login.AdminLoginFragment"
         android:label="Admin Login"
         tools:layout="@layout/fragment_admin_login">
         <action

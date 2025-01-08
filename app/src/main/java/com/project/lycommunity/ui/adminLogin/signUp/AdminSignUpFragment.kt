@@ -1,4 +1,4 @@
-package com.project.lycommunity.ui.adminLogin
+package com.project.lycommunity.ui.adminLogin.signUp
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.project.lycommunity.R
 import com.project.lycommunity.data.AdminUserRepository
 import com.project.lycommunity.databinding.FragmentAdminSignUpBinding
+import com.project.lycommunity.ui.adminLogin.login.AdminLoginFragment
 import com.project.lycommunity.util.ResultsWrapper
 import kotlinx.coroutines.launch
 

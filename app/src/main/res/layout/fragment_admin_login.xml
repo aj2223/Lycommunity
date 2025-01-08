@@ -4,55 +4,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.adminLogin.AdminLoginFragment">
+    tools:context=".ui.adminLogin.login.AdminLoginFragment"
+    android:padding="20dp">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/admin_email"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias=".5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.393"
-        android:hint="Enter admin email"/>
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/admin_pass"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
-        android:hint="Enter admin password"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/admin_email"
-        app:layout_constraintVertical_bias="0.075"
-        android:inputType="textPassword"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/login_admin_button"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign In As Admin"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/logo3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/admin_pass"
-        app:layout_constraintVertical_bias="0.155" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
+    <!-- Email Input -->
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/admin_email"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:hint="Enter admin email"
+        app:layout_constraintTop_toBottomOf="@id/image_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="40dp" />
+
+    <!-- Password Input -->
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/admin_pass"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:hint="Enter admin password"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@id/admin_email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp" />
+
+    <!-- Sign-In Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/login_admin_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Sign In As Admin"
+        app:layout_constraintTop_toBottomOf="@id/admin_pass"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="24dp" />
+
+    <!-- Progress Bar -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/login_admin_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- Sign-Up Link -->
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/sign_up_admin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SignUp As an Admin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Sign Up As an Admin"
+        app:layout_constraintTop_toBottomOf="@id/login_admin_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_admin_button"
-        app:layout_constraintVertical_bias="0.136" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

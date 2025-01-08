@@ -13,7 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.google.firebase.firestore.FirebaseFirestore
 import com.project.lycommunity.R
 import com.project.lycommunity.databinding.FragmentLoginBinding
-import com.project.lycommunity.ui.adminLogin.AdminLoginFragment
+import com.project.lycommunity.ui.adminLogin.login.AdminLoginFragment
 import com.project.lycommunity.ui.home.HomeFragment
 import com.project.lycommunity.ui.signup.SignUpFragment
 import com.project.lycommunity.util.LoginValidationHelper

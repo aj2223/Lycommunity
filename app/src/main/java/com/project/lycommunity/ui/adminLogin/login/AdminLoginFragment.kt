@@ -1,4 +1,4 @@
-package com.project.lycommunity.ui.adminLogin
+package com.project.lycommunity.ui.adminLogin.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,11 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.project.lycommunity.R
 import com.project.lycommunity.data.AdminUserRepository
+import com.project.lycommunity.data.EventsRepository
 import com.project.lycommunity.databinding.FragmentAdminLoginBinding
 import com.project.lycommunity.ui.admin.AdminFragment
+import com.project.lycommunity.ui.adminEvents.AdminEventsViewModel
+import com.project.lycommunity.ui.adminEvents.AdminEventsViewModelFactory
+import com.project.lycommunity.ui.adminLogin.signUp.AdminSignUpFragment
 import com.project.lycommunity.util.ResultsWrapper
 import kotlinx.coroutines.launch
 
@@ -21,6 +26,10 @@ class AdminLoginFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val repository = AdminUserRepository()
+
+    private val viewModel: AdminLoginViewModel by viewModels {
+        AdminLoginViewModelFactory(AdminUserRepository())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +42,13 @@ class AdminLoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         navigateToAdminSignUp()
+        setUpViews()
+        observeUIState()
+    }
+
+    private fun setUpViews() {
         binding.loginAdminButton.setOnClickListener {
             val email = binding.adminEmail.text.toString()
             val password = binding.adminPass.text.toString()
@@ -43,39 +58,34 @@ class AdminLoginFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            verifyAdminCredentials(email, password)
+            viewModel.loginAdmin(email, password)
         }
     }
 
-    private fun verifyAdminCredentials(email: String, password: String) {
+    private fun observeUIState() {
         lifecycleScope.launch {
-            when (val result = repository.verifyAdminCredentials(email, password)) {
-                is ResultsWrapper.Success -> {
-                    if (result.data) {
-                        navigateToAdminFeatures()
-                    } else {
-                        Toast.makeText(context, "Invalid credentials", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                is ResultsWrapper.Error -> {
-                    Toast.makeText(context, "Error: ${result.exception.message}", Toast.LENGTH_SHORT).show()
+            viewModel.uiState.collect { state ->
+                binding.progressBar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+
+                state.message?.let {
+                    Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
                 }
 
-                else -> {}
+                if (state.isSuccess) {
+                    navigateToAdminFeatures()
+                }
             }
         }
     }
 
     private fun navigateToAdminFeatures() {
-        binding.loginAdminButton.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment, AdminFragment())
-                .addToBackStack(null)
-                .commit()
-        }
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.nav_host_fragment, AdminFragment())
+            .addToBackStack(null)
+            .commit()
     }
 
-    private fun navigateToAdminSignUp(){
+    private fun navigateToAdminSignUp() {
         binding.signUpAdmin.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.nav_host_fragment, AdminSignUpFragment())
