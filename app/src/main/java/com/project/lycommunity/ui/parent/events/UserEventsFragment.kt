@@ -12,7 +12,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.project.lycommunity.R
 import com.project.lycommunity.data.EventsRepository
 import com.project.lycommunity.databinding.FragmentUserEventsBinding
 import com.project.lycommunity.ui.adapters.UserEventsAdapter

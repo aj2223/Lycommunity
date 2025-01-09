@@ -11,7 +11,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.project.lycommunity.R
 import com.project.lycommunity.data.ProfileRepository
 import com.project.lycommunity.databinding.FragmentProfileBinding
 import com.project.lycommunity.util.AddDetailsDialogFragment

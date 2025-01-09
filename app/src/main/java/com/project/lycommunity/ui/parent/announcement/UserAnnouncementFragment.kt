@@ -1,7 +1,6 @@
 package com.project.lycommunity.ui.parent.announcement
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.auth.FirebaseAuth
 import com.project.lycommunity.data.AnnouncementRepository
 import com.project.lycommunity.databinding.FragmentUserAnnouncementBinding
 import com.project.lycommunity.ui.adapters.UserAnnouncementAdapter

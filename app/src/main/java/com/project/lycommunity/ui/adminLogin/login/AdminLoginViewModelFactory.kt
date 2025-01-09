@@ -3,7 +3,6 @@ package com.project.lycommunity.ui.adminLogin.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.project.lycommunity.data.AdminUserRepository
-import com.project.lycommunity.ui.login.LoginViewModel
 
 class AdminLoginViewModelFactory(
     private val repository: AdminUserRepository

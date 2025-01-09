@@ -10,7 +10,6 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import com.project.lycommunity.R
 import com.project.lycommunity.databinding.FragmentHomeBinding
-import com.project.lycommunity.ui.adapters.UserAnnouncementAdapter
 import com.project.lycommunity.ui.adapters.TabAdapter
 import com.project.lycommunity.ui.login.LoginViewModel
 import com.project.lycommunity.ui.notifications.NotificationsFragment
