@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.project.lycommunity.R
 import com.project.lycommunity.data.AdminUserRepository
 import com.project.lycommunity.databinding.FragmentAdminLoginBinding
@@ -18,7 +20,7 @@ import kotlinx.coroutines.launch
 
 class AdminLoginFragment : Fragment() {
 
-    private var _binding : FragmentAdminLoginBinding? = null
+    private var _binding: FragmentAdminLoginBinding? = null
     private val binding get() = _binding!!
 
     private val repository = AdminUserRepository()
@@ -59,16 +61,19 @@ class AdminLoginFragment : Fragment() {
     }
 
     private fun observeUIState() {
-        lifecycleScope.launch {
-            viewModel.uiState.collect { state ->
-                binding.progressBar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { state ->
+                    binding.progressBar.visibility =
+                        if (state.isLoading) View.VISIBLE else View.GONE
 
-                state.message?.let {
-                    Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-                }
+                    state.message?.let {
+                        Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                    }
 
-                if (state.isSuccess) {
-                    navigateToAdminFeatures()
+                    if (state.isSuccess) {
+                        navigateToAdminFeatures()
+                    }
                 }
             }
         }

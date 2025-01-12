@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.project.lycommunity.util.ResultsWrapper
 import com.project.lycommunity.util.SecurityUtils
+import com.project.lycommunity.util.SecurityUtils.hashPassword
 import kotlinx.coroutines.tasks.await
 
 class AdminUserRepository {
@@ -37,7 +38,7 @@ class AdminUserRepository {
         }
     }
 
-    suspend fun registerAdmin(email: String, password: String): ResultsWrapper<Void?> {
+    suspend fun registerAdmin1(email: String, password: String): ResultsWrapper<Void?> {
         return try {
             // Check if email already exists
             val query = adminsCollection.whereEqualTo("email", email).get().await()
@@ -55,6 +56,26 @@ class AdminUserRepository {
 
             adminsCollection.document().set(adminData).await()
             ResultsWrapper.Success(null)
+        } catch (e: Exception) {
+            ResultsWrapper.Error(e)
+        }
+    }
+
+    suspend fun registerAdmin(email: String, password: String, department: String): ResultsWrapper<Boolean> {
+        return try {
+            val hashedPassword = hashPassword(password)
+            val adminData = mapOf(
+                "email" to email,
+                "passwordHash" to hashedPassword,
+                "department" to department
+            )
+
+            firestore.collection("admins")
+                .document(email)
+                .set(adminData)
+                .await()
+
+            ResultsWrapper.Success(true)
         } catch (e: Exception) {
             ResultsWrapper.Error(e)
         }

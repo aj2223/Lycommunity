@@ -135,6 +135,7 @@
                 android:gravity="center"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
+                android:textColor="@color/mainColor"
                 android:text="@string/forgot_password" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -163,9 +164,9 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:backgroundTint="@color/colorFb"
+            android:backgroundTint="@color/mainColor"
             android:text="@string/sign_in"
-            android:textColor="@color/core_text_color"
+            android:textColor="@color/off_white"
             app:layout_constraintEnd_toStartOf="@id/guide_right"
             app:layout_constraintStart_toEndOf="@id/guide_left"
             app:layout_constraintTop_toBottomOf="@id/input_layout_guest" />
@@ -210,6 +211,7 @@
                     android:id="@+id/txt_go_to_sign_up"
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
+                    android:textColor="@color/mainColor"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"

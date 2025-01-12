@@ -26,9 +26,6 @@ class LoginFragment : Fragment() {
 
     private val viewModelOfLogin : LoginViewModel by activityViewModels() {LoginViewModelFactory()}
 
-    private val firestore = FirebaseFirestore.getInstance()
-    private var currentUserEmail: String? = null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

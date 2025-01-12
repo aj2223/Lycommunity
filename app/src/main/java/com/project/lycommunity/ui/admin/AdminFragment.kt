@@ -9,7 +9,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.project.lycommunity.databinding.FragmentAdminBinding
 import com.project.lycommunity.ui.adapters.AdminTabAdapter
 
-class )AdminFragment : Fragment() {
+class AdminFragment : Fragment() {
 
     private var _binding: FragmentAdminBinding? = null
     private val binding get() = _binding!!

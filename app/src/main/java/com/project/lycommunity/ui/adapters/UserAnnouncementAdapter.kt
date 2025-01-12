@@ -37,6 +37,7 @@ class UserAnnouncementAdapter(
         private val dislikeIcon = itemView.findViewById<ImageView>(R.id.dislike_icon)
         private val likeCount = itemView.findViewById<TextView>(R.id.like_count)
         private val dislikeCount = itemView.findViewById<TextView>(R.id.dislike_count)
+        private val department = itemView.findViewById<TextView>(R.id.department_rv_announcement)
 
         fun bind(announcement: Announcement) {
             title.text = announcement.title
@@ -45,6 +46,7 @@ class UserAnnouncementAdapter(
                 .format(Date(announcement.timestamp))
             likeCount.text = announcement.likes.toString()
             dislikeCount.text = announcement.dislikes.toString()
+            department.text = announcement.department // Bind the department
 
             // Handle like and dislike interactions
             likeIcon.setOnClickListener {
@@ -55,6 +57,33 @@ class UserAnnouncementAdapter(
             }
         }
     }
+
+//    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+//        private val title = itemView.findViewById<TextView>(R.id.announcement_title)
+//        private val description = itemView.findViewById<TextView>(R.id.announcement_description)
+//        private val timestamp = itemView.findViewById<TextView>(R.id.announcement_timestamp)
+//        private val likeIcon = itemView.findViewById<ImageView>(R.id.like_icon)
+//        private val dislikeIcon = itemView.findViewById<ImageView>(R.id.dislike_icon)
+//        private val likeCount = itemView.findViewById<TextView>(R.id.like_count)
+//        private val dislikeCount = itemView.findViewById<TextView>(R.id.dislike_count)
+//
+//        fun bind(announcement: Announcement) {
+//            title.text = announcement.title
+//            description.text = announcement.description
+//            timestamp.text = SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault())
+//                .format(Date(announcement.timestamp))
+//            likeCount.text = announcement.likes.toString()
+//            dislikeCount.text = announcement.dislikes.toString()
+//
+//            // Handle like and dislike interactions
+//            likeIcon.setOnClickListener {
+//                onLikeClicked(announcement.id)
+//            }
+//            dislikeIcon.setOnClickListener {
+//                onDislikeClicked(announcement.id)
+//            }
+//        }
+//    }
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Announcement>() {

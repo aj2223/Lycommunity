@@ -9,6 +9,7 @@ data class Announcement(
     val id: String = "",
     val title: String = "",
     val description: String = "",
+    val department: String = "",
     val timestamp: Long = System.currentTimeMillis(), // Long type for timestamp
     val likes: Int = 0,
     val dislikes: Int = 0

@@ -12,6 +12,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.project.lycommunity.data.AnnouncementRepository
 import com.project.lycommunity.databinding.FragmentUserAnnouncementBinding
 import com.project.lycommunity.ui.adapters.UserAnnouncementAdapter
@@ -41,9 +43,11 @@ class UserAnnouncementFragment : Fragment() {
 
         setupRecyclerView()
         observeAnnouncements()
+
     }
 
-    private fun setupRecyclerView() {
+
+    private fun setupRecyclerView1() {
         adapter = UserAnnouncementAdapter(
             onLikeClicked = { announcementId -> viewModelOfAnnouncement.likeAnnouncement(announcementId) },
             onDislikeClicked = { announcementId -> viewModelOfAnnouncement.dislikeAnnouncement(announcementId) }
@@ -53,7 +57,41 @@ class UserAnnouncementFragment : Fragment() {
 
     }
 
+    private fun setupRecyclerView() {
+        adapter = UserAnnouncementAdapter(
+            onLikeClicked = { announcementId ->
+                viewModelOfAnnouncement.likeAnnouncement(announcementId)
+            },
+            onDislikeClicked = { announcementId ->
+                viewModelOfAnnouncement.dislikeAnnouncement(announcementId)
+            }
+        )
+        binding.userAnnouncementRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.userAnnouncementRecyclerView.adapter = adapter
+    }
+
     private fun observeAnnouncements() {
+        // Observe the announcements data flow
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModelOfAnnouncement.announcementsFlow.collect { announcements ->
+                adapter.submitList(announcements)
+            }
+        }
+
+        // Observe UI state for loading and errors
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModelOfAnnouncement.uiState.collect { state ->
+                binding.progressBar.isVisible = state.isLoading
+
+                state.errorMessage?.let {
+                    Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                    viewModelOfAnnouncement.clearErrorMessage()
+                }
+            }
+        }
+    }
+
+    private fun observeAnnouncements1() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {

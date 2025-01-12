@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lycommunity</string>
+    <string name="app_name">LYCOMMUNITY</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="email_title">Email</string>
@@ -21,4 +21,9 @@
     <string name="register_first_name">Register First Name</string>
     <string name="name">Name</string>
     <string name="sign_in_as_admin">Sign In as ADMIN</string>
+
+    <string name="drawer_open">Open Navigation Drawer</string>
+    <string name="drawer_close">Close Navigation Drawer</string>
+
+
 </resources>
