@@ -2,6 +2,7 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
     android:background="@color/primaryColor">
@@ -14,13 +15,26 @@
         android:src="@drawable/user"
         android:layout_gravity="center" />
 
+    <!-- User Profile Name -->
     <TextView
-        android:id="@+id/header_title"
+        android:id="@+id/drawer_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="User Name"
         android:textSize="18sp"
         android:textColor="@android:color/white"
-        android:layout_marginTop="8dp" />
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- User Department -->
+    <TextView
+        android:id="@+id/drawer_user_department"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Department"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="8dp"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

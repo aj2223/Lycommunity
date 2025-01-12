@@ -11,6 +11,9 @@
         android:id="@+id/admin_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:tabIndicatorColor="@color/mainColor"
+        app:tabSelectedTextColor="@color/core_text_color"
+        app:tabTextColor="@color/dark_BG"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- ViewPager for Tabs -->

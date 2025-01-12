@@ -7,16 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.project.lycommunity.R
 import com.project.lycommunity.data.NotificationsRepository
 import com.project.lycommunity.databinding.FragmentNotificationsBinding
 import com.project.lycommunity.ui.adapters.NotificationsAdapter
+import com.project.lycommunity.ui.login.LoginFragment
 import kotlinx.coroutines.launch
 
 
@@ -44,6 +47,12 @@ class NotificationsFragment : Fragment() {
 
         setupRecyclerView()
         observeViewModel()
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                showLogoutConfirmationDialog()
+            }
+        })
     }
 
     private fun setupRecyclerView() {
@@ -73,6 +82,25 @@ class NotificationsFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun showLogoutConfirmationDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Confirm Logout")
+            .setMessage("Are you sure you want to logout?")
+            .setPositiveButton("Yes") { _, _ ->
+                navigateToLoginFragment()
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun navigateToLoginFragment() {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.nav_host_fragment, LoginFragment())
+            .addToBackStack(null) // Optional, depending on navigation flow
+            .commit()
+        Toast.makeText(requireContext(), "Logged out", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
