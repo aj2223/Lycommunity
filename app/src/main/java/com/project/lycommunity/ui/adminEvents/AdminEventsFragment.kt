@@ -105,6 +105,11 @@ class AdminEventsFragment : Fragment() {
         dialog.show(parentFragmentManager, "EditEventDialog")
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 
 
 }

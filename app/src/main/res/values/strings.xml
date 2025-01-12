@@ -24,6 +24,7 @@
 
     <string name="drawer_open">Open Navigation Drawer</string>
     <string name="drawer_close">Close Navigation Drawer</string>
+    <string name="reset_password">Reset Password</string>
 
 
 </resources>

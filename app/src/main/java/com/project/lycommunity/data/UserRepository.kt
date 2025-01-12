@@ -1,6 +1,7 @@
 package com.project.lycommunity.data
 
 import android.util.Log
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.project.lycommunity.util.ResultsWrapper
 import com.project.lycommunity.util.SecurityUtils
@@ -10,6 +11,17 @@ class UserRepository {
     private val firestore = FirebaseFirestore.getInstance()
     private val usersCollection = firestore.collection("Users")
     private val studentsCollection = firestore.collection("Students")
+
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+
+    suspend fun resetPassword(email: String): ResultsWrapper<Void?> {
+        return try {
+            auth.sendPasswordResetEmail(email).await()
+            ResultsWrapper.Success(null)
+        } catch (e: Exception) {
+            ResultsWrapper.Error(e)
+        }
+    }
     suspend fun registerUser(user: User): ResultsWrapper<Void?> {
         return try {
             val email = user.email ?: return ResultsWrapper.Error(Exception("Email cannot be null."))

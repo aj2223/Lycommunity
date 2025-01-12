@@ -14,6 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.project.lycommunity.R
 import com.project.lycommunity.databinding.FragmentLoginBinding
 import com.project.lycommunity.ui.adminLogin.login.AdminLoginFragment
+import com.project.lycommunity.ui.forgotpass.ForgotPasswordFragment
 import com.project.lycommunity.ui.home.HomeFragment
 import com.project.lycommunity.ui.signup.SignUpFragment
 import com.project.lycommunity.util.LoginValidationHelper
@@ -42,6 +43,7 @@ class LoginFragment : Fragment() {
         observeViewModel()
         goToSignUpFragment()
         goToAdminFragment()
+        goToForgotPasswordFragment()
 
     }
 
@@ -119,6 +121,15 @@ class LoginFragment : Fragment() {
         }
     }
 
+
+    private fun goToForgotPasswordFragment(){
+        binding.txtForgotPassword.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment, ForgotPasswordFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+    }
 
 
     override fun onDestroyView() {
