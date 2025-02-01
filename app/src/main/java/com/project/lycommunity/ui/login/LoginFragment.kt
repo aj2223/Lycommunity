@@ -14,6 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.project.lycommunity.R
 import com.project.lycommunity.databinding.FragmentLoginBinding
 import com.project.lycommunity.ui.adminLogin.login.AdminLoginFragment
+import com.project.lycommunity.ui.analytics.AnalyticsFragment
 import com.project.lycommunity.ui.forgotpass.ForgotPasswordFragment
 import com.project.lycommunity.ui.home.HomeFragment
 import com.project.lycommunity.ui.signup.SignUpFragment

@@ -31,28 +31,6 @@ class LoginViewModel(
     val userEmail: StateFlow<String?> = _userEmail.asStateFlow()
 
 
-
-//    fun login(email: String, password: String) {
-//        _uiState.update { it.copy(isLoading = true) }
-//
-//        viewModelScope.launch {
-//            val result = userRepository.loginUser(email, password)
-//            when (result) {
-//                is ResultsWrapper.Success -> {
-//                    userEmail = email // Save email for later use
-//                    _uiState.update { it.copy(isLoading = false, isSuccess = true) }
-//                }
-//                is ResultsWrapper.Error -> {
-//                    _uiState.update {
-//                        it.copy(isLoading = false, errorMessage = result.exception.message)
-//                    }
-//                }
-//
-//                else -> {}
-//            }
-//        }
-//    }
-
     fun login(email: String, password: String) {
         _uiState.update { it.copy(isLoading = true) }
 
@@ -61,8 +39,10 @@ class LoginViewModel(
             when (result) {
                 is ResultsWrapper.Success -> {
                     _userEmail.value = email // Save the logged-in user's email
+                    userRepository.updateLastActive(email) // Update lastActive in Firestore
                     _uiState.update { it.copy(isLoading = false, isSuccess = true) }
                 }
+
                 is ResultsWrapper.Error -> {
                     _uiState.update {
                         it.copy(isLoading = false, errorMessage = result.exception.message)
@@ -74,10 +54,10 @@ class LoginViewModel(
         }
     }
 
+
     fun getUserEmail(): String? {
         return _userEmail.value
     }
-
 
 
     fun resetState() {
@@ -88,5 +68,4 @@ class LoginViewModel(
             )
         }
     }
-
 }

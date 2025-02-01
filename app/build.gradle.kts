@@ -44,6 +44,8 @@ android {
     }
 }
 
+
+
 dependencies {
 
     val lifecycle_version = "2.8.7"
@@ -84,6 +86,8 @@ dependencies {
 
     // BCrypt for password hashing
     implementation ("at.favre.lib:bcrypt:0.9.0")
+
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
     // main
     implementation("androidx.core:core-ktx:1.9.0")

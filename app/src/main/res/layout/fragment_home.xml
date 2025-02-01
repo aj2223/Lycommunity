@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             app:tabIndicatorColor="@color/mainColor"
             app:tabSelectedTextColor="@color/core_text_color"
-            app:tabTextColor="@color/dark_BG"
+            app:tabTextColor="@color/mainColor"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
         <!-- ViewPager2 for Tab Fragments -->

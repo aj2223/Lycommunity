@@ -8,11 +8,14 @@ import android.view.ViewGroup
 import com.google.android.material.tabs.TabLayoutMediator
 import com.project.lycommunity.databinding.FragmentAdminBinding
 import com.project.lycommunity.ui.adapters.AdminTabAdapter
+import com.project.lycommunity.ui.adapters.TabAdapter
 
 class AdminFragment : Fragment() {
 
     private var _binding: FragmentAdminBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var adminTabAdapter: AdminTabAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,7 +26,7 @@ class AdminFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupTabLayout()
+        setupTabs()
     }
 
     private fun setupTabLayout() {
@@ -34,9 +37,25 @@ class AdminFragment : Fragment() {
             tab.text = when (position) {
                 0 -> "Announcements"
                 1 -> "Events"
+                2 -> "Analytics"
                 else -> null
             }
         }.attach()
+    }
+
+    private fun setupTabs() {
+        val tabLayoutMediator =
+            TabLayoutMediator(binding.adminTabLayout, binding.adminViewPager) { tab, position ->
+                when (position) {
+                    0 -> tab.text = "Announcements"
+                    1 -> tab.text = "Events"
+                    2 -> tab.text = "Analytics"
+                }
+            }
+
+        adminTabAdapter = AdminTabAdapter(this)
+        binding.adminViewPager.adapter = adminTabAdapter
+        tabLayoutMediator.attach()
     }
 
 

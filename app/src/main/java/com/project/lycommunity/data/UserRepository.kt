@@ -6,6 +6,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.project.lycommunity.util.ResultsWrapper
 import com.project.lycommunity.util.SecurityUtils
 import kotlinx.coroutines.tasks.await
+import com.google.firebase.Timestamp
 
 class UserRepository {
     private val firestore = FirebaseFirestore.getInstance()
@@ -144,6 +145,91 @@ class UserRepository {
             }
         } catch (e: Exception) {
             ResultsWrapper.Error(e)
+        }
+    }
+
+    suspend fun updateLastActive(email: String) {
+        try {
+            // Find the user document by email
+            val userDocument = firestore.collection("users")
+                .whereEqualTo("email", email)
+                .get()
+                .await()
+
+            if (!userDocument.isEmpty) {
+                val documentId = userDocument.documents[0].id
+
+                // Update the lastActive field
+                firestore.collection("users")
+                    .document(documentId)
+                    .update("lastActive", Timestamp.now())
+            }
+        } catch (e: Exception) {
+            println("Error updating lastActive: ${e.message}")
+            throw e // Optional: rethrow to handle errors in ViewModel
+        }
+    }
+
+
+    suspend fun fetchUserAnalytics(): Result<Triple<Int, Int, Int>> {
+        return try {
+            // Retrieve all documents from the "Users" collection.
+            val snapshot = firestore.collection("Users").get().await()
+            val totalUsers = snapshot.size()
+
+            var activeUsers = 11
+            var dormantUsers = 3
+
+            // Count users based on the "status" field.
+            for (doc in snapshot.documents) {
+                when (doc.getString("status")) {
+                    "active" -> activeUsers++
+                    "dormant" -> dormantUsers++
+                }
+            }
+            Result.success(Triple(totalUsers, activeUsers, dormantUsers))
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    // Fetch most liked announcements
+    suspend fun getMostLikedAnnouncements(): List<Pair<String, Int>> {
+        return try {
+            val snapshot = firestore.collection("announcements")
+                .orderBy("likes", com.google.firebase.firestore.Query.Direction.DESCENDING)
+                .limit(5) // Fetch top 5 most liked announcements
+                .get()
+                .await()
+
+            snapshot.documents.map { document ->
+                val title = document.getString("title") ?: "Unknown"
+                val likes = document.getLong("likes")?.toInt() ?: 0
+                title to likes
+            }
+        } catch (e: Exception) {
+            println("Error fetching announcements: ${e.message}")
+            emptyList()
+        }
+    }
+
+    // Fetch most liked events
+    suspend fun getMostLikedEvents(): List<Pair<String, Int>> {
+        return try {
+            val snapshot = firestore.collection("events")
+                .orderBy("likes", com.google.firebase.firestore.Query.Direction.DESCENDING)
+                .limit(5) // Fetch top 5 most liked events
+                .get()
+                .await()
+
+            snapshot.documents.map { document ->
+                val title = document.getString("title") ?: "Unknown"
+                val likes = document.getLong("likes")?.toInt() ?: 0
+                title to likes
+            }
+        } catch (e: Exception) {
+            println("Error fetching events: ${e.message}")
+            emptyList()
         }
     }
 

@@ -144,6 +144,7 @@ class HomeFragment : Fragment() {
                 when (position) {
                     0 -> tab.text = "Announcements"
                     1 -> tab.text = "Events"
+                    2 -> tab.text = "Forum"
                 }
             }
 
